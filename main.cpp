@@ -3,17 +3,12 @@
 
 int main()
 {
-
-    ChessPiece* chessBoard[3][3];
-
-    for (int i = 0; i < 3; i++)
-    {
-        for (int j = 0; j < 3; j++)
-        {
-            printf("%c",chessBoard[i][j]->getSymbol());
-        }
-        printf("\n");
-    }
-
+    ChessBoard board;
+    Rook rook('R', 1, 2);
+    board.SetPiece(1, 2, &rook);
+    board.PrintBoard();
+    cout<<"\n";
+    rook.FillBoardWithLegalMoves(&board, 8);
+    board.PrintBoard();
     return 0;
 }
