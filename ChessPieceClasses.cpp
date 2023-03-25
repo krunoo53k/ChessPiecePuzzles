@@ -54,9 +54,9 @@ public:
         }
     }
 
-    void SetPiece(int row, int col, ChessPiece *piece)
+    void SetPiece(ChessPiece *piece)
     {
-        board[row][col] = piece;
+        board[piece->getLocationX()][piece->getLocationY()] = piece;
     }
 
     void PrintBoard()
@@ -96,6 +96,12 @@ public:
         SetRow(row);
         SetColumn(column);
     }
+    Rook()
+        : ChessPiece('R')
+    {
+        SetRow(0);
+        SetColumn(0);
+    }
 void FillBoardWithLegalMoves(ChessBoard *chessBoard, int size) override //TODO: add size attribute in ChessBoard class
 {
     int posX = getLocationX();
@@ -110,7 +116,7 @@ void FillBoardWithLegalMoves(ChessBoard *chessBoard, int size) override //TODO: 
             Rook *rook = new Rook('+', posX, i); //TODO: add a new class to specify attacked field
             rook->SetRow(posX);
             rook->SetColumn(i);
-            chessBoard->SetPiece(posX, i, rook);
+            chessBoard->SetPiece(rook);
         }
     }
 
@@ -122,7 +128,7 @@ void FillBoardWithLegalMoves(ChessBoard *chessBoard, int size) override //TODO: 
             Rook *rook = new Rook('+', i, posY);
             rook->SetRow(i);
             rook->SetColumn(posY);
-            chessBoard->SetPiece(i, posY, rook);
+            chessBoard->SetPiece(rook);
         }
     }
 }
