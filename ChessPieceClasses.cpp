@@ -59,6 +59,15 @@ public:
         board[piece->getLocationX()][piece->getLocationY()] = piece;
     }
 
+    bool IsFieldOccupied(int locationX, int locationY)
+    {
+        if (board[locationX][locationY] == nullptr)
+            return false;
+        else
+            return true;
+        
+    }
+
     void PrintBoard()
     {
         for (int i = 0; i < 8; i++)
