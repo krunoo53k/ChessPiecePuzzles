@@ -65,7 +65,6 @@ public:
             return false;
         else
             return true;
-        
     }
 
     void PrintBoard()
@@ -111,36 +110,34 @@ public:
         SetRow(0);
         SetColumn(0);
     }
-void FillBoardWithLegalMoves(ChessBoard *chessBoard, int size) override //TODO: add size attribute in ChessBoard class
-{
-    int posX = getLocationX();
-    int posY = getLocationY();
-    auto board = chessBoard->GetBoard();
-
-    // Add legal moves in row
-    for (int i = 0; i < size; i++)
+    void FillBoardWithLegalMoves(ChessBoard *chessBoard, int size) override // TODO: add size attribute in ChessBoard class
     {
-        if (i != posY && (board[posX][i] == nullptr || board[posX][i]->getSymbol() == 'X'))
+        int posX = getLocationX();
+        int posY = getLocationY();
+        auto board = chessBoard->GetBoard();
+
+        // Add legal moves in row
+        for (int i = 0; i < size; i++)
         {
-            Rook *rook = new Rook('+', posX, i); //TODO: add a new class to specify attacked field
-            rook->SetRow(posX);
-            rook->SetColumn(i);
-            chessBoard->SetPiece(rook);
+            if (i != posY && (board[posX][i] == nullptr || board[posX][i]->getSymbol() == 'X'))
+            {
+                Rook *rook = new Rook('+', posX, i); // TODO: add a new class to specify attacked field
+                rook->SetRow(posX);
+                rook->SetColumn(i);
+                chessBoard->SetPiece(rook);
+            }
+        }
+
+        // Add legal moves in column
+        for (int i = 0; i < size; i++)
+        {
+            if (i != posX && (board[i][posY] == nullptr || board[i][posY]->getSymbol() == 'X'))
+            {
+                Rook *rook = new Rook('+', i, posY);
+                rook->SetRow(i);
+                rook->SetColumn(posY);
+                chessBoard->SetPiece(rook);
+            }
         }
     }
-
-    // Add legal moves in column
-    for (int i = 0; i < size; i++)
-    {
-        if (i != posX && (board[i][posY] == nullptr || board[i][posY]->getSymbol() == 'X'))
-        {
-            Rook *rook = new Rook('+', i, posY);
-            rook->SetRow(i);
-            rook->SetColumn(posY);
-            chessBoard->SetPiece(rook);
-        }
-    }
-}
-
-
 };
